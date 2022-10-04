@@ -26,30 +26,29 @@ const Kimg = styled.img`
 const CardBody = styled.div`
     padding:10px 10px;
 `
-const Kh5 = styled.h5`
-opacity:50%;
+const Kh3 = styled.h3`
 `
-
-const Card = ({nav})=> {
+const Card = ()=> {
     let [card, setCard] = useState([]);
     useEffect( () => {
         return () => {
-            fetch(`https://newsapi.org/v2/everything?q=${nav}&from=2022-10-03&sortBy=popularity&apiKey=8e43ceee3eb84a2aa9ccce147385e73c`)
+            fetch(`https://api.thecatapi.com/v1/breeds?attach_breed=0`)
             .then( resp => resp.json())
-            .then( res  => setCard(res.articles))
+            .then( res  => setCard(res))
       }
-    },[nav])
+    },[])
 
+    console.log(card);
     return(
         <Kontainer>
         {
-            card.map( (article) => (
+            card.map( (data) => (
             <Kard key={Math.random() * 1000}>
-                <Kimg src={article.urlToImage} alt='img error' />
+                <Kimg src={''} alt='img error' />
                 <CardBody>
-                    <Kh5>{article.author}</Kh5>
-                    <h3>{article.title}</h3>
-                    <p>{article.description}</p>
+                    <Kh3>{data.name}</Kh3>
+                    <p>{data.name}</p>
+                    <p>{data.description}</p>
                 </CardBody>
             </Kard>
             ))
