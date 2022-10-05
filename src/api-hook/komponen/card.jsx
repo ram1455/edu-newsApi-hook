@@ -32,7 +32,7 @@ const Card = ()=> {
     let [card, setCard] = useState([]);
     useEffect( () => {
         return () => {
-            fetch(`https://api.thecatapi.com/v1/breeds?attach_breed=0`)
+            fetch(`https://api.thecatapi.com/v1/images/search?limit=10&breed_ids=beng&api_key=live_vJhw7KTlG6cSigM81f8uSLvK0enV93bILxjFbNDwecnIF0jOv381gfqF2LCZmDqN`)
             .then( resp => resp.json())
             .then( res  => setCard(res))
       }
@@ -44,11 +44,12 @@ const Card = ()=> {
         {
             card.map( (data) => (
             <Kard key={Math.random() * 1000}>
-                <Kimg src={''} alt='img error' />
+                <Kimg src={data.url} alt='img error' />
                 <CardBody>
-                    <Kh3>{data.name}</Kh3>
-                    <p>{data.name}</p>
-                    <p>{data.description}</p>
+                    <Kh3>{data.breeds[0].name}</Kh3>
+                    <p>{data.breeds[0].description}</p>
+                    <br/>
+                    <h5>temperament :{data.breeds[0].temperament}</h5>
                 </CardBody>
             </Kard>
             ))
